@@ -1,7 +1,3 @@
-export const metadata = {
-  title: 'Coast FIRE Calculator - When Can You Stop Saving?',
-  description: 'Calculate how much you need to save now to coast to financial independence. Free Coast FIRE calculator with detailed results.',
-};
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50">

@@ -1,6 +1,19 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
+
+// Define the results type
+interface CalculationResults {
+  fireNumber: number;
+  coastFireNumber: number;
+  currentSavings: number;
+  futureValue: number;
+  additionalNeeded: number;
+  isCoastFire: boolean;
+  yearsToRetirement: number;
+  monthlyIncome: number;
+}
 
 export default function CoastFireCalculator() {
   // Form inputs
@@ -12,7 +25,7 @@ export default function CoastFireCalculator() {
   const [returnRate, setReturnRate] = useState('7');
   
   // Results
-  const [results, setResults] = useState(null);
+  const [results, setResults] = useState<CalculationResults | null>(null);
   const [showResults, setShowResults] = useState(false);
 
   // Calculate Coast FIRE
@@ -42,7 +55,7 @@ export default function CoastFireCalculator() {
     // Are you already Coast FIRE?
     const isCoastFire = savings >= coastFireNumber;
 
-    const calculationResults = {
+    const calculationResults: CalculationResults = {
       fireNumber: fireNumber,
       coastFireNumber: coastFireNumber,
       currentSavings: savings,
@@ -58,7 +71,7 @@ export default function CoastFireCalculator() {
   };
 
   // Format currency
-  const formatCurrency = (amount) => {
+  const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -77,7 +90,7 @@ export default function CoastFireCalculator() {
             🔥 Coast FIRE Calculator
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover how much you need to save now to "coast" to financial independence, 
+            Discover how much you need to save now to coast to financial independence, 
             even if you never save another dollar again.
           </p>
         </div>
@@ -199,7 +212,7 @@ export default function CoastFireCalculator() {
                 <div className="text-6xl mb-4">🧮</div>
                 <p>Enter your information and click calculate to see your Coast FIRE results.</p>
               </div>
-            ) : (
+            ) : results && (
               <div className="space-y-6">
                 
                 {/* Coast FIRE Status */}
@@ -274,12 +287,12 @@ export default function CoastFireCalculator() {
 
         {/* Back to Home */}
         <div className="text-center mt-12">
-          <a 
+          <Link 
             href="/" 
             className="inline-block bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors"
           >
             ← Back to Home
-          </a>
+          </Link>
         </div>
 
       </div>
