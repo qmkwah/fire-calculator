@@ -27,12 +27,12 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Save to database
+    // Save to database - use undefined instead of null
     const leadData = {
       email,
       source: source || 'homepage',
-      calculator_type: null,
-      calculator_results: null,
+      calculator_type: undefined as string | undefined,
+      calculator_results: undefined as Record<string, unknown> | undefined,
     };
 
     await saveEmailLead(leadData);

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 // Define the results type
 interface CalculationResults {
@@ -147,7 +148,7 @@ export default function CoastFireCalculator() {
             🔥 Coast FIRE Calculator
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover how much you need to save now to "coast" to financial independence, 
+            Discover how much you need to save now to &quot;coast&quot; to financial independence, 
             even if you never save another dollar again.
           </p>
         </div>
@@ -385,12 +386,12 @@ export default function CoastFireCalculator() {
 
         {/* Back to Home */}
         <div className="text-center mt-12">
-          <a 
+          <Link 
             href="/" 
             className="inline-block bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors"
           >
             ← Back to Home
-          </a>
+          </Link>
         </div>
 
       </div>

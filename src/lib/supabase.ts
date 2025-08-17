@@ -18,7 +18,7 @@ export interface EmailLead {
   email: string;
   source: string;
   calculator_type?: string;
-  calculator_results?: any;
+  calculator_results?: Record<string, unknown>;
   current_age?: number;
   current_savings?: number;
   retirement_age?: number;
@@ -96,7 +96,7 @@ export async function checkEmailExists(email: string) {
 }
 
 // Alternative function that matches the API route parameter structure
-export async function saveEmailLeadSimple(email: string, source: string, calculatorData?: any) {
+export async function saveEmailLeadSimple(email: string, source: string, calculatorData?: Record<string, unknown>) {
   const data: Omit<EmailLead, 'id' | 'created_at' | 'updated_at'> = {
     email,
     source,

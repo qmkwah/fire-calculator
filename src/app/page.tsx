@@ -32,7 +32,7 @@ export default function Home() {
       } else {
         alert('Error subscribing. Please try again.');
       }
-    } catch (error) {
+    } catch {
       alert('Error subscribing. Please try again.');
     } finally {
       setEmailSubmitting(false);
@@ -123,7 +123,7 @@ export default function Home() {
               <div className="text-green-600 text-2xl mb-2">✅</div>
               <h3 className="text-xl font-bold text-green-800 mb-2">Welcome aboard!</h3>
               <p className="text-green-700">
-                You're now subscribed to our weekly FIRE tips. Check your email for a welcome message!
+                You&apos;re now subscribed to our weekly FIRE tips. Check your email for a welcome message!
               </p>
             </div>
           )}
