@@ -384,6 +384,58 @@ export default function CoastFireCalculator() {
 
         </div>
 
+        {/* Blog Links Section - Added for SEO Internal Linking */}
+        {results && (
+          <div className="mt-12 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-8">
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+              Learn More About FIRE Strategies
+            </h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              <Link href="/blog/what-is-coast-fire-complete-guide" className="group">
+                <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-blue-200">
+                  <h4 className="font-bold text-lg text-gray-900 mb-3 group-hover:text-blue-600">
+                    Complete Coast FIRE Guide
+                  </h4>
+                  <p className="text-gray-600 text-sm">
+                    Everything you need to know about Coast FIRE strategy and how it works
+                  </p>
+                  <div className="mt-4 text-blue-600 font-medium text-sm">
+                    Read Article →
+                  </div>
+                </div>
+              </Link>
+              
+              <Link href="/blog/how-to-calculate-fire-number-guide" className="group">
+                <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-blue-200">
+                  <h4 className="font-bold text-lg text-gray-900 mb-3 group-hover:text-blue-600">
+                    Calculate Your FIRE Number
+                  </h4>
+                  <p className="text-gray-600 text-sm">
+                    Step-by-step guide to determining how much you need for financial independence
+                  </p>
+                  <div className="mt-4 text-blue-600 font-medium text-sm">
+                    Read Article →
+                  </div>
+                </div>
+              </Link>
+              
+              <Link href="/blog/fire-strategies-for-beginners" className="group">
+                <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-blue-200">
+                  <h4 className="font-bold text-lg text-gray-900 mb-3 group-hover:text-blue-600">
+                    FIRE Strategies for Beginners
+                  </h4>
+                  <p className="text-gray-600 text-sm">
+                    Practical steps to start your journey to financial independence today
+                  </p>
+                  <div className="mt-4 text-blue-600 font-medium text-sm">
+                    Read Article →
+                  </div>
+                </div>
+              </Link>
+            </div>
+          </div>
+        )}
+
         {/* Back to Home */}
         <div className="text-center mt-12">
           <Link 

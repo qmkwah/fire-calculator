@@ -13,7 +13,7 @@ export default function Navigation() {
           
           {/* Navigation Links */}
           <div className="hidden md:flex space-x-8">
-            <Link href="/" className="text-gray-700 hover:text-blue-600 transition-colors">
+            <Link href="/calculator/coast-fire" className="text-gray-700 hover:text-blue-600 transition-colors">
               Calculator
             </Link>
             <Link href="/blog" className="text-gray-700 hover:text-blue-600 transition-colors">

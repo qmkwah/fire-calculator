@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function Home() {
   const [email, setEmail] = useState('');
@@ -82,9 +83,12 @@ export default function Home() {
               Master the concepts of financial independence with our comprehensive 
               guides and strategies.
             </p>
-            <button className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+            <a 
+              href="/blog"
+              className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors inline-block"
+            >
               Read Articles
-            </button>
+            </a>
           </div>
 
         </div>
@@ -130,6 +134,80 @@ export default function Home() {
         </div>
 
       </div>
+
+      {/* Blog Preview Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Learn About Financial Independence
+            </h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              Master the strategies and concepts behind FIRE with our comprehensive guides
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <Link href="/blog/what-is-coast-fire-complete-guide" className="group">
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 hover:shadow-lg transition-all duration-300">
+                <div className="bg-blue-600 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                  <span className="text-white font-bold text-xl">1</span>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600">
+                  What is Coast FIRE?
+                </h3>
+                <p className="text-gray-600 mb-4">
+                  Complete guide to understanding Coast FIRE strategy and how it can accelerate your path to retirement.
+                </p>
+                <div className="text-blue-600 font-medium">
+                  Read Full Guide →
+                </div>
+              </div>
+            </Link>
+            
+            <Link href="/blog/how-to-calculate-fire-number-guide" className="group">
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 hover:shadow-lg transition-all duration-300">
+                <div className="bg-green-600 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                  <span className="text-white font-bold text-xl">2</span>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-green-600">
+                  Calculate Your FIRE Number
+                </h3>
+                <p className="text-gray-600 mb-4">
+                  Learn the exact formula to determine how much money you need to achieve financial independence.
+                </p>
+                <div className="text-green-600 font-medium">
+                  Read Full Guide →
+                </div>
+              </div>
+            </Link>
+            
+            <Link href="/blog/fire-strategies-for-beginners" className="group">
+              <div className="bg-gradient-to-br from-purple-50 to-violet-50 rounded-xl p-6 hover:shadow-lg transition-all duration-300">
+                <div className="bg-purple-600 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                  <span className="text-white font-bold text-xl">3</span>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-purple-600">
+                  FIRE Strategies
+                </h3>
+                <p className="text-gray-600 mb-4">
+                  Practical strategies and actionable steps to start your FIRE journey today.
+                </p>
+                <div className="text-purple-600 font-medium">
+                  Read Full Guide →
+                </div>
+              </div>
+            </Link>
+          </div>
+          
+          <div className="text-center mt-12">
+            <Link href="/blog" className="inline-flex items-center px-6 py-3 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors">
+              View All Articles
+              <span className="ml-2">→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
