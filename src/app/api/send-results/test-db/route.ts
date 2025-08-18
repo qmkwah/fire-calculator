@@ -13,7 +13,8 @@ export async function GET() {
     }
 
     return NextResponse.json({ success: true, data });
-  } catch (error) {
+  } catch (err) {
+    console.error('Database connection error:', err);
     return NextResponse.json({ error: 'Connection failed' }, { status: 500 });
   }
 }

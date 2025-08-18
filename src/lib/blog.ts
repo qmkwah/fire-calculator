@@ -26,7 +26,8 @@ export function getAllPostSlugs() {
     return fileNames
       .filter((fileName) => fileName.endsWith('.md'))
       .map((fileName) => fileName.replace(/\.md$/, ''));
-  } catch (error) {
+  } catch (err) {
+    console.error('Error reading posts directory:', err);
     return [];
   }
 }
@@ -54,8 +55,8 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
       seoTitle: data.seoTitle || data.title,
       seoDescription: data.seoDescription || data.excerpt,
     };
-  } catch (error) {
-    console.error(`Error reading post ${slug}:`, error);
+  } catch (err) {
+    console.error(`Error reading post ${slug}:`, err);
     return null;
   }
 }

@@ -66,12 +66,12 @@ export default function Home() {
               Find out how much you need to save now to retire comfortably later, 
               even if you never save another dollar.
             </p>
-            <a 
+            <Link 
               href="/calculator/coast-fire"
               className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-block"
             >
               Start Calculator
-            </a>
+            </Link>
           </div>
 
           {/* Blog Card */}
@@ -83,12 +83,12 @@ export default function Home() {
               Master the concepts of financial independence with our comprehensive 
               guides and strategies.
             </p>
-            <a 
+            <Link 
               href="/blog"
               className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors inline-block"
             >
               Read Articles
-            </a>
+            </Link>
           </div>
 
         </div>

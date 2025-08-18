@@ -132,7 +132,7 @@ export default async function BlogPage() {
             <div className="text-6xl mb-4">📝</div>
             <h2 className="text-2xl font-bold text-gray-800 mb-4">Coming Soon!</h2>
             <p className="text-gray-600 mb-8">
-              We're working on amazing FIRE content for you. Check back soon!
+              We&apos;re working on amazing FIRE content for you. Check back soon!
             </p>
             <Link 
               href="/calculator/coast-fire"
