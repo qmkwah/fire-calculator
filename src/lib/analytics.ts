@@ -1,14 +1,29 @@
 // src/lib/analytics.ts
 
+// Define types for form data and gtag parameters
+interface CalculatorFormData {
+  currentAge: number;
+  currentSavings: number;
+  retirementAge: number;
+  [key: string]: unknown;
+}
+
+interface GtagEventParameters {
+  event_category?: string;
+  event_label?: string;
+  custom_parameters?: Record<string, unknown>;
+  [key: string]: unknown;
+}
+
 // Declare gtag function for TypeScript
 declare global {
   interface Window {
-    gtag: (...args: any[]) => void;
+    gtag: (command: string, action: string, parameters?: GtagEventParameters) => void;
   }
 }
 
 // Track calculator usage
-export const trackCalculatorUse = (formData: any) => {
+export const trackCalculatorUse = (formData: CalculatorFormData) => {
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'calculator_used', {
       event_category: 'engagement',
