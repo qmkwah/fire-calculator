@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Fix metadata base URL issue
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+// Get site URL with correct fallback for production
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.yourfirejourney.com';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -52,13 +52,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Use environment variable with fallback to hardcoded value
+  // This is processed at build time, not runtime
   const gaId = process.env.NEXT_PUBLIC_GA_ID || 'G-4QZD03LF48';
+  
+  // For debugging in production
+  console.log('🔍 Site URL:', siteUrl);
+  console.log('🔍 Environment:', process.env.NODE_ENV);
 
   return (
     <html lang="en">
       <head>
-        {/* Google Analytics */}
+        {/* Production Google Analytics */}
         {gaId && (
           <>
             <script 
@@ -68,13 +72,30 @@ export default function RootLayout({
             <script
               dangerouslySetInnerHTML={{
                 __html: `
+                  console.log('🚀 Initializing Google Analytics with ID: ${gaId}');
+                  console.log('🌍 Site URL: ${siteUrl}');
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
                   gtag('config', '${gaId}', {
                     page_title: document.title,
-                    page_location: window.location.href
+                    page_location: window.location.href,
+                    send_page_view: true
                   });
+                  
+                  // Debug info
+                  setTimeout(() => {
+                    if (typeof gtag === 'function') {
+                      console.log('✅ Google Analytics loaded successfully');
+                      gtag('event', 'page_view', {
+                        event_category: 'debug',
+                        event_label: 'production_test',
+                        page_location: window.location.href
+                      });
+                    } else {
+                      console.log('❌ Google Analytics failed to load');
+                    }
+                  }, 3000);
                 `,
               }}
             />
