@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { GoogleAnalytics } from '@next/third-parties/google';
 import "./globals.css";
 
 import Navigation from './components/Navigation';
@@ -15,7 +14,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// Fix metadata base URL issue
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: 'FIRE Retirement Calculator - Free Coast FIRE Calculator',
   description: 'Calculate your path to financial independence and early retirement with our free Coast FIRE calculator. Get results via email and learn FIRE strategies.',
   keywords: 'fire calculator, coast fire, financial independence, early retirement, retirement calculator',
@@ -23,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Free Coast FIRE Calculator - When Can You Stop Saving?',
     description: 'Calculate your Coast FIRE number and discover when you can stop saving for retirement. Free calculator with comprehensive FIRE guides.',
-    url: process.env.NEXT_PUBLIC_SITE_URL,
+    url: siteUrl,
     siteName: 'FIRE Retirement Calculator',
     images: [
       {
@@ -49,9 +52,36 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Use environment variable with fallback to hardcoded value
+  const gaId = process.env.NEXT_PUBLIC_GA_ID || 'G-4QZD03LF48';
+
   return (
     <html lang="en">
       <head>
+        {/* Google Analytics */}
+        {gaId && (
+          <>
+            <script 
+              async 
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+            />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${gaId}', {
+                    page_title: document.title,
+                    page_location: window.location.href
+                  });
+                `,
+              }}
+            />
+          </>
+        )}
+        
+        {/* Structured Data for SEO */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -60,7 +90,7 @@ export default function RootLayout({
               '@type': 'WebApplication',
               name: 'FIRE Retirement Calculator',
               description: 'Free Coast FIRE calculator to determine when you can stop saving for retirement',
-              url: process.env.NEXT_PUBLIC_SITE_URL,
+              url: siteUrl,
               applicationCategory: 'FinanceApplication',
               operatingSystem: 'Any',
               offers: {
@@ -81,10 +111,6 @@ export default function RootLayout({
       >
         <Navigation />
         {children}
-        
-        {process.env.NEXT_PUBLIC_GA_ID && (
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
-        )}
       </body>
     </html>
   );
