@@ -52,78 +52,30 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // This is processed at build time, not runtime
-  const gaId = process.env.NEXT_PUBLIC_GA_ID || 'G-4QZD03LF48';
-  
-  // For debugging in production
-  console.log('🔍 Site URL:', siteUrl);
-  console.log('🔍 Environment:', process.env.NODE_ENV);
+  // Google Analytics ID
+  const gaId = 'G-4QZD03LF48';
 
   return (
     <html lang="en">
       <head>
-        {/* Fixed Google Analytics - Force Data Collection */}
-        {gaId && (
-          <>
-            <script 
-              async 
-              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-            />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-                  console.log('🚀 Initializing Google Analytics with ID: ${gaId}');
-                  console.log('🌍 Site URL: ${siteUrl}');
-                  
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  
-                  gtag('js', new Date());
-                  
-                  // Configure with explicit settings
-                  gtag('config', '${gaId}', {
-                    page_title: document.title,
-                    page_location: window.location.href,
-                    page_path: window.location.pathname,
-                    send_page_view: true,
-                    anonymize_ip: false,
-                    allow_google_signals: true,
-                    allow_ad_personalization_signals: true
-                  });
-                  
-                  // Force immediate page view
-                  gtag('event', 'page_view', {
-                    page_title: document.title,
-                    page_location: window.location.href,
-                    page_path: window.location.pathname
-                  });
-                  
-                  // Debug logging
-                  setTimeout(() => {
-                    if (typeof gtag === 'function') {
-                      console.log('✅ Google Analytics loaded successfully');
-                      
-                      // Send test event
-                      gtag('event', 'test_production_tracking', {
-                        event_category: 'debug',
-                        event_label: 'production_site',
-                        page_location: window.location.href,
-                        custom_parameters: {
-                          timestamp: new Date().toISOString(),
-                          user_agent: navigator.userAgent.substring(0, 50)
-                        }
-                      });
-                      
-                      console.log('🎯 Test event sent to GA');
-                    } else {
-                      console.log('❌ Google Analytics failed to load');
-                    }
-                  }, 2000);
-                `,
-              }}
-            />
-          </>
-        )}
+        {/* Google Analytics - Exact format from Google */}
+        <script 
+          async 
+          src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${gaId}');
+              
+              // Debug logging (remove after testing)
+              console.log('Google Analytics initialized with ID: ${gaId}');
+            `,
+          }}
+        />
         
         {/* Structured Data for SEO */}
         <script
