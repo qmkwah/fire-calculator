@@ -62,7 +62,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Production Google Analytics */}
+        {/* Fixed Google Analytics - Force Data Collection */}
         {gaId && (
           <>
             <script 
@@ -74,28 +74,51 @@ export default function RootLayout({
                 __html: `
                   console.log('🚀 Initializing Google Analytics with ID: ${gaId}');
                   console.log('🌍 Site URL: ${siteUrl}');
+                  
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
+                  
                   gtag('js', new Date());
+                  
+                  // Configure with explicit settings
                   gtag('config', '${gaId}', {
                     page_title: document.title,
                     page_location: window.location.href,
-                    send_page_view: true
+                    page_path: window.location.pathname,
+                    send_page_view: true,
+                    anonymize_ip: false,
+                    allow_google_signals: true,
+                    allow_ad_personalization_signals: true
                   });
                   
-                  // Debug info
+                  // Force immediate page view
+                  gtag('event', 'page_view', {
+                    page_title: document.title,
+                    page_location: window.location.href,
+                    page_path: window.location.pathname
+                  });
+                  
+                  // Debug logging
                   setTimeout(() => {
                     if (typeof gtag === 'function') {
                       console.log('✅ Google Analytics loaded successfully');
-                      gtag('event', 'page_view', {
+                      
+                      // Send test event
+                      gtag('event', 'test_production_tracking', {
                         event_category: 'debug',
-                        event_label: 'production_test',
-                        page_location: window.location.href
+                        event_label: 'production_site',
+                        page_location: window.location.href,
+                        custom_parameters: {
+                          timestamp: new Date().toISOString(),
+                          user_agent: navigator.userAgent.substring(0, 50)
+                        }
                       });
+                      
+                      console.log('🎯 Test event sent to GA');
                     } else {
                       console.log('❌ Google Analytics failed to load');
                     }
-                  }, 3000);
+                  }, 2000);
                 `,
               }}
             />
